@@ -1,0 +1,59 @@
+\\psf\Home\Documents\Visual Studio 2013\Projects\DataManager\DataManager\obj\Debug\DataIntegrator.csprojResolveAssemblyReference.cache
+\\psf\Home\Documents\Visual Studio 2013\Projects\DataManager\DataManager\obj\Debug\Interop.SAPbobsCOM.dll
+\\psf\Home\Documents\Visual Studio 2013\Projects\DataManager\DataManager\obj\Debug\DataIntegrator.csproj.ResolveComReference.cache
+\\psf\Home\Documents\Visual Studio 2013\Projects\DataManager\DataManager\bin\Debug\DataIntegrator.exe
+\\psf\Home\Documents\Visual Studio 2013\Projects\DataManager\DataManager\bin\Debug\DataIntegrator.pdb
+\\psf\Home\Documents\Visual Studio 2013\Projects\DataManager\DataManager\bin\Debug\NucleoBase.dll
+\\psf\Home\Documents\Visual Studio 2013\Projects\DataManager\DataManager\obj\Debug\DataIntegrator.exe
+\\psf\Home\Documents\Visual Studio 2013\Projects\DataManager\DataManager\obj\Debug\DataIntegrator.pdb
+\\psf\Home\Documents\Visual Studio 2013\Projects\DataManager\DataManager\bin\Debug\DataIntegrator.exe.config
+\\Mac\Home\Documents\Visual Studio 2017\Projects\DataManager\DataManager\bin\Debug\DataIntegrator.exe.config
+\\Mac\Home\Documents\Visual Studio 2017\Projects\DataManager\DataManager\bin\Debug\DataIntegrator.exe
+\\Mac\Home\Documents\Visual Studio 2017\Projects\DataManager\DataManager\bin\Debug\DataIntegrator.pdb
+\\Mac\Home\Documents\Visual Studio 2017\Projects\DataManager\DataManager\obj\Debug\DataIntegrator.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\Visual Studio 2017\Projects\DataManager\DataManager\obj\Debug\Interop.SAPbobsCOM.dll
+\\Mac\Home\Documents\Visual Studio 2017\Projects\DataManager\DataManager\obj\Debug\DataIntegrator.csproj.ResolveComReference.cache
+\\Mac\Home\Documents\Visual Studio 2017\Projects\DataManager\DataManager\obj\Debug\DataIntegrator.exe
+\\Mac\Home\Documents\Visual Studio 2017\Projects\DataManager\DataManager\obj\Debug\DataIntegrator.pdb
+C:\Users\r.morales\Documents\Visual Studio 2013\Projects\DataManager\DataManager\bin\Debug\DataIntegrator.exe.config
+C:\Users\r.morales\Documents\Visual Studio 2013\Projects\DataManager\DataManager\obj\Debug\Interop.SAPbobsCOM.dll
+C:\Users\r.morales\Documents\Visual Studio 2013\Projects\DataManager\DataManager\obj\Debug\DataIntegrator.csproj.ResolveComReference.cache
+C:\Users\r.morales\Documents\Visual Studio 2013\Projects\DataManager\DataManager\obj\Debug\DataIntegrator.exe
+C:\Users\r.morales\Documents\Visual Studio 2013\Projects\DataManager\DataManager\obj\Debug\DataIntegrator.pdb
+C:\Users\r.morales\Documents\Visual Studio 2013\Projects\DataManager\DataManager\bin\Debug\DataIntegrator.exe
+C:\Users\r.morales\Documents\Visual Studio 2013\Projects\DataManager\DataManager\bin\Debug\DataIntegrator.pdb
+C:\Users\r.morales\Documents\Visual Studio 2013\Projects\DataManager\DataManager\obj\Debug\DataIntegrator.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\Visual Studio 2017\Projects\DataManager\DataManager\bin\Debug\Newtonsoft.Json.dll
+\\Mac\Home\Documents\Visual Studio 2017\Projects\DataManager\DataManager\bin\Debug\Newtonsoft.Json.xml
+\\mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\bin\Debug\DataIntegrator.exe.config
+\\mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\obj\Debug\Interop.SAPbobsCOM.dll
+\\mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\obj\Debug\DataIntegrator.csproj.ResolveComReference.cache
+\\mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\obj\Debug\DataIntegrator.exe
+\\mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\obj\Debug\DataIntegrator.pdb
+\\mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\obj\Debug\DataIntegrator.csprojResolveAssemblyReference.cache
+\\mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\bin\Debug\DataIntegrator.exe
+\\mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\bin\Debug\DataIntegrator.pdb
+\\mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\bin\Debug\Newtonsoft.Json.dll
+\\mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\bin\Debug\Newtonsoft.Json.xml
+\\Mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\bin\Debug\NucleoBase.dll
+C:\Users\maick\Desktop\MIT\Papelera\DataManager\DataManager\obj\Debug\Interop.SAPbobsCOM.dll
+C:\Users\maick\Desktop\MIT\Papelera\DataManager\DataManager\obj\Debug\DataIntegrator.csproj.ResolveComReference.cache
+C:\Users\maick\Desktop\MIT\Papelera\DataManager\DataManager\bin\Debug\DataIntegrator.exe.config
+C:\Users\maick\Desktop\MIT\Papelera\DataManager\DataManager\obj\Debug\DataIntegrator.csprojResolveAssemblyReference.cache
+C:\Users\maick\Desktop\MIT\Papelera\DataManager\DataManager\bin\Debug\DataIntegrator.exe
+C:\Users\maick\Desktop\MIT\Papelera\DataManager\DataManager\bin\Debug\DataIntegrator.pdb
+C:\Users\maick\Desktop\MIT\Papelera\DataManager\DataManager\bin\Debug\Newtonsoft.Json.dll
+C:\Users\maick\Desktop\MIT\Papelera\DataManager\DataManager\bin\Debug\NucleoBase.dll
+C:\Users\maick\Desktop\MIT\Papelera\DataManager\DataManager\bin\Debug\Newtonsoft.Json.xml
+C:\Users\maick\Desktop\MIT\Papelera\DataManager\DataManager\obj\Debug\DataIntegrator.exe
+C:\Users\maick\Desktop\MIT\Papelera\DataManager\DataManager\obj\Debug\DataIntegrator.pdb
+C:\Users\HP\Desktop\MIT\Papelera\DataManager\DataManager\bin\Debug\DataIntegrator.exe.config
+C:\Users\HP\Desktop\MIT\Papelera\DataManager\DataManager\obj\Debug\Interop.SAPbobsCOM.dll
+C:\Users\HP\Desktop\MIT\Papelera\DataManager\DataManager\obj\Debug\DataIntegrator.csproj.ResolveComReference.cache
+C:\Users\HP\Desktop\MIT\Papelera\DataManager\DataManager\obj\Debug\DataIntegrator.exe
+C:\Users\HP\Desktop\MIT\Papelera\DataManager\DataManager\obj\Debug\DataIntegrator.pdb
+C:\Users\HP\Desktop\MIT\Papelera\DataManager\DataManager\bin\Debug\DataIntegrator.exe
+C:\Users\HP\Desktop\MIT\Papelera\DataManager\DataManager\bin\Debug\DataIntegrator.pdb
+C:\Users\HP\Desktop\MIT\Papelera\DataManager\DataManager\bin\Debug\Newtonsoft.Json.dll
+C:\Users\HP\Desktop\MIT\Papelera\DataManager\DataManager\bin\Debug\Newtonsoft.Json.xml
+C:\Users\HP\Desktop\MIT\Papelera\DataManager\DataManager\obj\Debug\DataIntegrator.csprojResolveAssemblyReference.cache

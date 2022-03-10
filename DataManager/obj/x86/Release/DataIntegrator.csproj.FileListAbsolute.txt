@@ -1,0 +1,13 @@
+\\Mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\bin\x86\Release\DataIntegrator.exe.config
+\\Mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\bin\x86\Release\DataIntegrator.exe
+\\Mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\bin\x86\Release\DataIntegrator.XmlSerializers.dll
+\\Mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\bin\x86\Release\DataIntegrator.pdb
+\\Mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\bin\x86\Release\Newtonsoft.Json.dll
+\\Mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\bin\x86\Release\NucleoBase.dll
+\\Mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\bin\x86\Release\Newtonsoft.Json.xml
+\\Mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\obj\x86\Release\DataIntegrator.csprojResolveAssemblyReference.cache
+\\Mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\obj\x86\Release\Interop.SAPbobsCOM.dll
+\\Mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\obj\x86\Release\DataIntegrator.csproj.ResolveComReference.cache
+\\Mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\obj\x86\Release\DataIntegrator.exe
+\\Mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\obj\x86\Release\DataIntegrator.pdb
+\\Mac\Home\Desktop\MIT\Papelera\DataManager\DataManager\obj\x86\Release\DataIntegrator.XmlSerializers.dll
