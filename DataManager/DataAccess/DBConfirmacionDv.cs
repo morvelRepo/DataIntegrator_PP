@@ -30,6 +30,7 @@ namespace DataIntegrator.DataAccess
                     oconf.vehicle_code = row.S("vehicle_code");
                     oconf.clave_envio = row.S("clave_Envio");
                     oconf.status = row.S("estatus");
+                    oconf.comentarios = row.S("comentarios");
 
                     olst.Add(oconf);
                 }
@@ -85,6 +86,6 @@ namespace DataIntegrator.DataAccess
             }
         }
 
-
+        
     }
 }

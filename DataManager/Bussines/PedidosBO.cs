@@ -149,14 +149,14 @@ namespace DataIntegrator.Bussines
                 oSapDoc.UserFields.Fields.Item("U_FolioNR").Value = oF.FolioNR;
                 oSapDoc.UserFields.Fields.Item("U_Pedido").Value = oF.sPedido == string.Empty ? oF.NumPeridoEBO.S() : oF.sPedido;
                 oSapDoc.UserFields.Fields.Item("U_PedidoAutorizado").Value = oF.PedidoAutorizado == 1 ? 99 : oF.PedidoAutorizado;
+
+                oSapDoc.Confirmed = oF.PedidoAutorizado == 1 ? SAPbobsCOM.BoYesNoEnum.tYES : SAPbobsCOM.BoYesNoEnum.tNO;
+
                 oSapDoc.UserFields.Fields.Item("U_NumPedidoEBO").Value = oF.NumPeridoEBO;
                 oSapDoc.UserFields.Fields.Item("U_CenCostClie").Value = oF.sCtoCostoCli;
-
-
                 oSapDoc.UserFields.Fields.Item("U_PMX_PLTY").Value = "LO";
                 oSapDoc.TransportationCode = 1;
                 
-
                 //oSapDoc.UserFields.Fields.Item("TrnspCode").Value = "Local";
 
                 string sWhsCode = string.Empty;

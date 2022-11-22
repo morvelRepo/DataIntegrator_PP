@@ -15,5 +15,6 @@ namespace DataIntegrator.Clases
         public static string sOrigenDocumento = ConfigurationManager.AppSettings["OrigenDocumento"].S();
         public static string sUrlTipoCambioFB = ConfigurationManager.AppSettings["UrlTipoCambioFirebase"].S();
         public static string sActualizaTCtoFirebase = ConfigurationManager.AppSettings["ActualizaTCtoFirebase"].S();
+        public static string sDirectorioImagenesConfirmacion = ConfigurationManager.AppSettings["DirectorioImagenesEntrega"].S();
     }
 }

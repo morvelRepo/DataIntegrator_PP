@@ -25,19 +25,27 @@ namespace DataIntegrator.Bussines
 
                 foreach (ConfirmacionDV oF in oLstConfirmaciones)
                 {
-                    if (ActualizaDocumentoSAP(oF))
+                    try
                     {
-                        try
+                        if (ActualizaDocumentoSAP(oF))
                         {
-                            new DBConfirmacionDv().DBSetActualizaPedigoEntregado(oF.idConf, oF.code, 2, oF.msg);
+                            try
+                            {
+                                new DBConfirmacionDv().DBSetActualizaPedigoEntregado(oF.idConf, oF.code, 2, oF.msg);
+                            }
+                            catch (Exception ex)
+                            {
+                                Utils.GuardarBitacora("Error paso 2  desc:" + ex.Message);
+                            }
                         }
-                        catch (Exception ex)
-                        {
-                            Utils.GuardarBitacora("Error paso 2  desc:" + ex.Message);
-                        }
+                        else
+                            new DBConfirmacionDv().DBSetActualizaPedigoEntregado(oF.idConf, oF.code, 1, oF.msg);
                     }
-                    else
-                        new DBConfirmacionDv().DBSetActualizaPedigoEntregado(oF.idConf, oF.code, 1, oF.msg);
+                    catch (Exception ex)
+                    {
+                        Utils.GuardarBitacora("CodigoEntrega: " + oF.code + ", U_RumEnt: " + oF.route_code + ", ClaveEnvio: "+ oF.clave_envio);
+                        throw ex;
+                    }
                 }
 
                 return ban;
@@ -86,6 +94,7 @@ namespace DataIntegrator.Bussines
                     oPed.UserFields.Fields.Item("U_ECORutaEntrega").Value = Confirmacion.vehicle_code;
                     oPed.UserFields.Fields.Item("U_CveDireccionEnvio").Value = Confirmacion.clave_envio;
                     oPed.UserFields.Fields.Item("U_Estado").Value = Confirmacion.status;
+                    oPed.UserFields.Fields.Item("U_Comentario").Value = Confirmacion.comentarios;
 
                     int iRes = oPed.Update();
 

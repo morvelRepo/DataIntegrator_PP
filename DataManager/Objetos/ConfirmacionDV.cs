@@ -19,5 +19,6 @@ namespace DataIntegrator.Objetos
         public string clave_envio { set; get; }
         public string status { set; get; }
         public string msg { set; get; }
+        public string comentarios { set; get; }
     }
 }
