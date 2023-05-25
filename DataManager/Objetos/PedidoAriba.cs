@@ -15,6 +15,7 @@ namespace DataIntegrator.Objetos
         }
 
         public int IdPedido { set; get; }
+        public int IdEmpresa { set; get; }
         public string CredencialNetwork { set; get; }
         public string CredencialSystem { set; get; }
         public string CredencialEndpoint { set; get; }
@@ -66,6 +67,7 @@ namespace DataIntegrator.Objetos
         public string OrderRHBillExtrinOrderID { set; get; }
         public string OrderRHBillExtrinOrderType { set; get; }
         public string OrderRHBillExtrintype { set; get; }
+        public string RequestDeliveryDate { set; get; }
 
         public string OrderPayload { set; get; }
         public string OrderTimeStamp { set; get; }

@@ -76,6 +76,18 @@ namespace DataIntegrator.Bussines
                 {
                     oSapDoc.ShipToCode = oAddress.S();
                 }
+                else
+                {
+                    if (oF.IdEmpresa == 2)
+                    {
+                        object oAddressRes = new DBMetodos().GetValueByQuery("select top 1 [Address] from CRD1 (NOLOCK) WHERE U_ShipToAddressID = '1234'");
+                        if (!String.IsNullOrEmpty(oAddressRes.S()))
+                        {
+                            oSapDoc.ShipToCode = oAddressRes.S();
+                            oAddress = oAddressRes;
+                        }
+                    }
+                }
 
 
                 oSapDoc.DocDate = dtFechaPed;
@@ -86,22 +98,41 @@ namespace DataIntegrator.Bussines
                 oSapDoc.DiscountPercent = double.Parse(0.S());
 
                 oSapDoc.UserFields.Fields.Item("U_PedidoAutorizado").Value = 99; //oF.autorizado;
-
-                //if (oF.NumCtroCosto != string.Empty)
-                //    oSapDoc.UserFields.Fields.Item("U_ClvCentCosto").Value = oF.NumCtroCosto.S();
-
-                //if (oF.NumUsrCte > 0)
-                //    oSapDoc.UserFields.Fields.Item("U_NumUsrMod").Value = oF.NumUsrCte.S();
-
                 oSapDoc.UserFields.Fields.Item("U_Comment").Value = oF.OrderRHComments;
                 oSapDoc.UserFields.Fields.Item("U_NomUsuaCliente").Value = oF.olsConceptos[0].ExtriItemDeliverTo;
+                //oSapDoc.UserFields.Fields.Item("U_ERequerida").Value = oF.RequestDeliveryDate.Substring(0, 10).S();//.Replace("T", " ").S().Dt();
 
+                string sQueryFact = "SELECT U_Entregar, U_B1SYS_MainUsage FROM OCRD (NOLOCK) where CardCode = '" + oCardCode.S() + "'";
+                DataTable dtFact = new DBSAP_PRO().oBD_SP.EjecutarDT_DeQuery(sQueryFact);
+                if (dtFact != null && dtFact.Rows.Count > 0)
+                {
+                    oSapDoc.UserFields.Fields.Item("U_Entregar").Value = dtFact.Rows[0]["U_Entregar"].S();
+                    oSapDoc.UserFields.Fields.Item("U_B1SYS_MainUsage").Value = dtFact.Rows[0]["U_B1SYS_MainUsage"].S();
+                }
 
-                //oSapDoc.UserFields.Fields.Item("U_DescripcionCC").Value = oF.DescripcionCC;
-                //oSapDoc.UserFields.Fields.Item("U_Area").Value = oF.Area;
+                if (oF.IdEmpresa == 1) //Merck
+                {
+                    string sDominio = Globales.GetConfigApp<string>("DominioAribaMerck").S();
+                    object oDominio = new DBMetodos().GetValueByQuery("select top 1 U_Dominio from OCRD (NOLOCK) WHERE U_CompanyCode = '" + oF.OrderRHBillFaxAddressID + "'");
+                    if (!String.IsNullOrEmpty(oDominio.S()))
+                    {
+                        sDominio = oDominio.S();
+                    }
+
+                    string sDestino = oF.olsConceptos[0].ExtriItemRequester.S() + sDominio;
+                    oSapDoc.UserFields.Fields.Item("U_Correo").Value = sDestino;
+                }
+
+                if (oF.IdEmpresa == 2) //Pepsico
+                {
+                    oSapDoc.UserFields.Fields.Item("U_Correo").Value = "pepsico@principado.com.mx";
+                    oSapDoc.UserFields.Fields.Item("U_ShopAccountEmail").Value = "pepsico@principado.com.mx";
+                }
+
+                oSapDoc.UserFields.Fields.Item("U_CenCostClie").Value = oF.OrderRHShipName;
+                oSapDoc.UserFields.Fields.Item("U_DescripcionCC").Value = oF.OrderRHShipName;
                 //oSapDoc.UserFields.Fields.Item("U_Autorizador").Value = oF.Autorizador.S();
                 //oSapDoc.UserFields.Fields.Item("U_Autorizadores").Value = oF.Autorizadores;
-
 
                 //if (oF.FechaAutoriza.S().Length > 10)
                 //{
@@ -115,9 +146,7 @@ namespace DataIntegrator.Bussines
                 //oSapDoc.UserFields.Fields.Item("U_FolioNR").Value = oF.FolioNR;
                 oSapDoc.UserFields.Fields.Item("U_Pedido").Value = oF.OrderRHBillExtrinOrderID;
                 //oSapDoc.UserFields.Fields.Item("U_PedidoAutorizado").Value = oF.PedidoAutorizado == 1 ? 99 : oF.PedidoAutorizado;
-
                 oSapDoc.Confirmed = SAPbobsCOM.BoYesNoEnum.tYES;
-
                 //oSapDoc.UserFields.Fields.Item("U_NumPedidoEBO").Value = oF.NumPeridoEBO;
                 //oSapDoc.UserFields.Fields.Item("U_CenCostClie").Value = oF.sCtoCostoCli;
                 oSapDoc.UserFields.Fields.Item("U_PMX_PLTY").Value = "LO";
@@ -140,12 +169,17 @@ namespace DataIntegrator.Bussines
                 }
 
 
+                DataTable dtUnidadMedida = new DataTable();
+                string sQueryUM = "select distinct jh.SupplierPartID, jj.ItemCode, convert(varchar(50), JJ.U_DescArtCli) 'Unidad' from  [Ariba].[tbp_AB_PedidosRecibidos] jm (nolock) inner join [Ariba].[tbp_AB_PedidosRecibidosConceptos]  as jh (nolock) on (jm.IdPedido = jh.IdPedido) inner join sbo_principado.dbo.OSCN as jj (nolock) on (jh.SupplierPartID   COLLATE SQL_Latin1_General_CP850_CI_AS  = jj.ItemCode COLLATE SQL_Latin1_General_CP850_CI_AS ) inner join sbo_principado.dbo.OCRD as hj (nolock) on (jj.CardCode = hj.CardCode and jm.CredencialNetwork COLLATE SQL_Latin1_General_CP850_CI_AS  = hj.U_ANID COLLATE SQL_Latin1_General_CP850_CI_AS) where jm.IdPedido = " + oF.IdPedido.S();
+                dtUnidadMedida = new DBBase().oBD_SP.EjecutarDT_DeQuery(sQueryUM);
 
                 string sTaxCode = string.Empty;
                 int iLinea = 1;
                 foreach (ConceptosPedidoAriba oCF in oF.olsConceptos)
                 {
-                    string sQueryItem = "SELECT TOP 1 U_ClaveProdServ, U_ClaveUnidad, TaxCodeAR, ItemName  FROM OITM oi WHERE oi.ItemCode = '" + oCF.SupplierPartID + "'";
+                    string sQueryItem = string.Empty;
+                    sQueryItem = "SELECT TOP 1 U_ClaveProdServ, U_ClaveUnidad, TaxCodeAR, ItemName  FROM OITM oi WHERE oi.ItemCode = '" + oCF.SupplierPartID + "'";
+
                     DataTable dt = new DBSAP_PRO().oBD_SP.EjecutarDT_DeQuery(sQueryItem);
 
                     string sClaveUnidad = string.Empty;
@@ -174,12 +208,21 @@ namespace DataIntegrator.Bussines
                     string sCodImpuesto = dt.Rows[0]["TaxCodeAR"].S();
                     string sNombreItem = dt.Rows[0]["ItemName"].S();
 
+                    DataRow[] rows = dtUnidadMedida.Select("SupplierPartID = " + oCF.SupplierPartID.S());
+                    if (rows != null && rows.Length > 0)
+                    {
+                        oSapDoc.Lines.UoMEntry = rows[0]["Unidad"].S().I();
+                    }
+
                     // FACTURA DE ARTICULOS
                     oSapDoc.Lines.ItemCode = oCF.SupplierPartID.S();
                     oSapDoc.Lines.ItemDescription = sNombreItem;
                     oSapDoc.Lines.Quantity = oCF.ScheQuantity.S().Db();
                     oSapDoc.Lines.BarCode = sCodBar;
                     oSapDoc.Lines.UnitPrice = oCF.UnitPrice.S().Db();
+
+                    oSapDoc.Lines.BaseLine = oCF.ScheLineNumber.S().I();
+
 
                     // FACTOR DE IMPUESTOS
                     Utils.GuardarBitacora("Item: " + oCF.SupplierPartID + " Impuesto: " + sCodImpuesto);
@@ -197,7 +240,7 @@ namespace DataIntegrator.Bussines
                     //oSapDoc.Lines.CostingCode5 = oCF.dimension5;
                     //oSapDoc.Lines.ProjectCode = oCF.proyecto;
 
-                    oSapDoc.Lines.UserFields.Fields.Item("U_LineNum").Value = iLinea.S();
+                    oSapDoc.Lines.UserFields.Fields.Item("U_LineNum").Value = oCF.ScheLineNumber.S();
                     oSapDoc.Lines.UserFields.Fields.Item("U_ClaveUnidad").Value = sClaveUnidad;
                     oSapDoc.Lines.UserFields.Fields.Item("U_ClaveProdServ").Value = sClaveProdServ;
                     //oSapDoc.Lines.UserFields.Fields.Item("U_ValorConcurso").Value = oCF.ValorConcurso;

@@ -43,7 +43,7 @@ namespace DataIntegrator.Bussines
                     }
                     catch (Exception ex)
                     {
-                        Utils.GuardarBitacora("CodigoEntrega: " + oF.code + ", U_RumEnt: " + oF.route_code + ", ClaveEnvio: "+ oF.clave_envio);
+                        Utils.GuardarBitacora("CodigoEntrega: " + oF.code + ", U_RumEnt: " + oF.route_code + ", ClaveEnvio: " + oF.clave_envio);
                         throw ex;
                     }
                 }
@@ -63,7 +63,7 @@ namespace DataIntegrator.Bussines
             try
             {
                 int IdSAP = new DBConfirmacionDv().ObtieneDocEntryDocumentoEntrega(Confirmacion.code);
-    
+
                 oPed = MyGlobals.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oDeliveryNotes);
 
                 if (oPed.GetByKey(IdSAP))
@@ -112,7 +112,7 @@ namespace DataIntegrator.Bussines
                 }
                 else
                 {
-                    Confirmacion.msg = "No se encontró la entrega en SAP, DocEntry: "+ IdSAP.S();
+                    Confirmacion.msg = "No se encontró la entrega en SAP, DocEntry: " + IdSAP.S();
                     Utils.GuardarBitacora("[LN ConfirmacionEntrega] No se encontró la entrega en SAP DocEntry: " + IdSAP.S());
                 }
 

@@ -62,6 +62,7 @@ namespace DataIntegrator
                     {
                         Utils.GuardarBitacora("Error en pedidos de ARIBA --> Error en paso " + MyGlobals.sStepLog + ": " + ex.Message);
                     }
+
                     // ------------------------------------------------------------------------------------------------------------------------
                     try
                     {

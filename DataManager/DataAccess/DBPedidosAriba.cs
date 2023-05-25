@@ -26,6 +26,7 @@ namespace DataIntegrator.DataAccess
                             List<PedidoAriba> oLst = dsRes.Tables[0].AsEnumerable().Select(r => new PedidoAriba()
                             {
                                 IdPedido = r["IdPedido"].S().I(),
+                                IdEmpresa = r["IDEmpresa"].S().I(),
                                 CredencialNetwork = r["CredencialNetwork"].S(),
                                 CredencialSystem = r["CredencialSystem"].S(),
                                 CredencialEndpoint = r["CredencialEndpoint"].S(),
@@ -72,6 +73,7 @@ namespace DataIntegrator.DataAccess
                                 OrderRHBillExtrinOrderID = r["OrderRHBillExtrinOrderID"].S(),
                                 OrderRHBillExtrinOrderType = r["OrderRHBillExtrinOrderType"].S(),
                                 OrderRHBillExtrintype = r["OrderRHBillExtrinType"].S(),
+                                RequestDeliveryDate = r["RequestDeliveryDate"].S(),
                                 OrderPayload = r["OrderPayload"].S(),
                                 OrderTimeStamp = r["OrderTimeStamp"].S(),
                                 OrderVersion = r["OrderVersion"].S()

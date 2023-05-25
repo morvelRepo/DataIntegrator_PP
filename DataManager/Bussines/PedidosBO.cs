@@ -14,6 +14,7 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Security;
 using System.Web.Script.Serialization;
+using System.Text.RegularExpressions;
 
 namespace DataIntegrator.Bussines
 {
@@ -112,6 +113,9 @@ namespace DataIntegrator.Bussines
                 oSapDoc.DiscountPercent = double.Parse(oF.descuento.S());
                 oSapDoc.UserFields.Fields.Item("U_PedidoAutorizado").Value = oF.autorizado;
 
+
+                oSapDoc.Confirmed = SAPbobsCOM.BoYesNoEnum.tYES;
+
                 //if (oF.NumUsrCte > 0)
                 //    oSapDoc.UserFields.Fields.Item("U_NumUsrCte").Value = oF.NumUsrCte.S();
 
@@ -133,6 +137,24 @@ namespace DataIntegrator.Bussines
                 oSapDoc.UserFields.Fields.Item("U_Autorizadores").Value = oF.Autorizadores;
 
 
+                string sQueryCorreo = string.Empty;
+                bool isNumerico = oF.IdCarrito.S().I() > 0 ? true : false;
+                // si IsNumerico es true : entonces es de la pape (primer carrito)
+                // si IsNumerico es falso: entonces el pedido viene del carrito nuevo
+                
+                if(isNumerico)
+                    sQueryCorreo = "select TOP 1 j3.U_CorreoElectronico Usuario from IntegratorSBO.[Principales].[tbp_DI_Pedidos] jj inner join [SBO_PRINCIPADO].[dbo].[@PPUSUCLIENTE] as j3  on jj.NumUsrCte = j3.U_NumUsuarioCliente where IdCarrito = '" + oF.IdCarrito + "'";
+                else
+                    sQueryCorreo =  "SELECT TOP 1 j2.Usuario FROM IntegratorSBO.[Principales].[tbp_DI_Pedidos] jj Inner join GestorUsuarios.GestorUsuarios.tbr_GU_PersonaEmpresa as j1 on jj.NumUsrCte = j1.IdUsuario Inner join GestorUsuarios.GestorUsuarios.tbc_GU_Personas as j2 on  j1.IdPersona = j2.IdPersona where IdCarrito = '" + oF.IdCarrito + "'";
+
+                DataTable dtCorreo = new DBSAP_PRO().oBD_SP.EjecutarDT_DeQuery(sQueryCorreo);
+                if (dtCorreo.Rows.Count > 0)
+                {
+                    oSapDoc.UserFields.Fields.Item("U_Correo").Value = dtCorreo.Rows[0]["Usuario"].S();
+                    oSapDoc.UserFields.Fields.Item("U_ShopAccountEmail").Value = dtCorreo.Rows[0]["Usuario"].S();
+                }
+
+
                 if (oF.FechaAutoriza.S().Length > 10)
                 {
                     oSapDoc.UserFields.Fields.Item("U_FechaAutoriza").Value = oF.FechaAutoriza.S().Substring(0, 10);
@@ -150,7 +172,7 @@ namespace DataIntegrator.Bussines
                 oSapDoc.UserFields.Fields.Item("U_Pedido").Value = oF.sPedido == string.Empty ? oF.NumPeridoEBO.S() : oF.sPedido;
                 oSapDoc.UserFields.Fields.Item("U_PedidoAutorizado").Value = oF.PedidoAutorizado == 1 ? 99 : oF.PedidoAutorizado;
 
-                oSapDoc.Confirmed = oF.PedidoAutorizado == 1 ? SAPbobsCOM.BoYesNoEnum.tYES : SAPbobsCOM.BoYesNoEnum.tNO;
+                //oSapDoc.Confirmed = oF.PedidoAutorizado == 1 ? SAPbobsCOM.BoYesNoEnum.tYES : SAPbobsCOM.BoYesNoEnum.tNO;
 
                 oSapDoc.UserFields.Fields.Item("U_NumPedidoEBO").Value = oF.NumPeridoEBO;
                 oSapDoc.UserFields.Fields.Item("U_CenCostClie").Value = oF.sCtoCostoCli;
@@ -224,7 +246,7 @@ namespace DataIntegrator.Bussines
                     string sCosCode2 = new DBMetodos().GetValueByQuery("SELECT TOP 1 U_RutaRep FROM CRD1 WHERE U_ClaveEnvio = " + oF.ClaveDireccionEnvio).S();
                     string sCosCode4 = new DBMetodos().GetValueByQuery("SELECT TOP 1 op.PrcCode FROM OCRD ocr INNER JOIN OPRC op ON ocr.CardName = op.PrcName WHERE ocr.CardCode = '" + oF.cardcode + "'").S();
 
-
+                    //string sCosCode1 = new DBMetodos().GetValueByQuery("SELECT TOP 1 op.PrcCode FROM OCRD ocr INNER JOIN OPRC op ON ocr.CardName = op.PrcName WHERE ocr.CardCode = '" + oF.cardcode + "'").S();
 
                     // FACTURA DE ARTICULOS
                     oSapDoc.Lines.ItemCode = oCF.item;
@@ -243,7 +265,7 @@ namespace DataIntegrator.Bussines
                         oSapDoc.Lines.WarehouseCode = oCF.WhsCode.S();
                     }
 
-                    
+
                     oSapDoc.Lines.CostingCode = oCF.dimension1;
                     oSapDoc.Lines.CostingCode2 = sCosCode2;
                     oSapDoc.Lines.CostingCode3 = oCF.dimension3;
