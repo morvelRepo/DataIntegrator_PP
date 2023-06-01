@@ -349,5 +349,17 @@ namespace DataIntegrator.DataAccess
                 }
             }
         }
+
+        public DataTable DBGetObtieneClientesConUM()
+        {
+            try
+            {
+                return oBD_SP.EjecutarDT("[Principales].[spS_DI_ConsultaClientesConUM]");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

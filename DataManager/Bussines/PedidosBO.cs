@@ -239,10 +239,25 @@ namespace DataIntegrator.Bussines
                         sClaveProdServ = dt.Rows[0]["U_ClaveProdServ"].S();
                     }
 
-                    int iOuMEntry = new DBMetodos().GetValueByQuery("SELECT TOP 1 ou.UomEntry FROM OITM oi INNER JOIN OUOM ou ON oi.InvntryUom = ou.UomName WHERE oi.ITEMCODE ='" + oCF.item + "' ").S().I();
-                    oSapDoc.Lines.UoMEntry = iOuMEntry;
+                    
 
-                    string sCodBar = new DBMetodos().GetValueByQuery("SELECT TOP 1 BcdCode  FROM OITM oi INNER JOIN OUOM ou ON oi.InvntryUom = ou.UomName INNER JOIN OBCD ob ON ou.UomEntry = ob.UomEntry WHERE oi.ItemCode = '" + oCF.item + "'").S();
+                    DataTable dtClientes = new DBPedidos().DBGetObtieneClientesConUM();
+                    if (dtClientes != null && dtClientes.Rows.Count > 0)
+                    {
+                        foreach (DataRow drUM in dtClientes.Rows)
+                        {
+                            if (oF.cardcode.S() == drUM["CardCode"].S())
+                            {
+                                int iOuMEntry = new DBMetodos().GetValueByQuery("SELECT TOP 1 ou.UomEntry FROM OITM oi INNER JOIN OUOM ou ON oi.InvntryUom = ou.UomName WHERE oi.ITEMCODE ='" + oCF.item + "' ").S().I();
+                                oSapDoc.Lines.UoMEntry = iOuMEntry;
+
+                                string sCodBar = new DBMetodos().GetValueByQuery("SELECT TOP 1 BcdCode  FROM OITM oi INNER JOIN OUOM ou ON oi.InvntryUom = ou.UomName INNER JOIN OBCD ob ON ou.UomEntry = ob.UomEntry WHERE oi.ItemCode = '" + oCF.item + "'").S();
+                                oSapDoc.Lines.BarCode = sCodBar;
+                            }
+                        }
+                    }
+
+                    
                     string sCosCode2 = new DBMetodos().GetValueByQuery("SELECT TOP 1 U_RutaRep FROM CRD1 WHERE U_ClaveEnvio = " + oF.ClaveDireccionEnvio).S();
                     string sCosCode4 = new DBMetodos().GetValueByQuery("SELECT TOP 1 op.PrcCode FROM OCRD ocr INNER JOIN OPRC op ON ocr.CardName = op.PrcName WHERE ocr.CardCode = '" + oF.cardcode + "'").S();
 
@@ -252,7 +267,6 @@ namespace DataIntegrator.Bussines
                     oSapDoc.Lines.ItemCode = oCF.item;
                     oSapDoc.Lines.ItemDescription = oCF.descripcionusuario;
                     oSapDoc.Lines.Quantity = oCF.cantidad.S().Db();
-                    oSapDoc.Lines.BarCode = sCodBar;
                     oSapDoc.Lines.UnitPrice = oCF.precio.S().Db();
                     //oSapDoc.Lines.DiscountPercent = oCF.descuento.S().Db();
 
