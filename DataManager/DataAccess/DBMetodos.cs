@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using NucleoBase.Core;
 using DataIntegrator.Clases;
+using System.Data;
 
 namespace DataIntegrator.DataAccess
 {
@@ -78,7 +79,25 @@ namespace DataIntegrator.DataAccess
             }
         }
 
-       
+        public DataTable DBGetObtieneInfoArticulo(string sItem, string sCardCode)
+        {
+            try
+            {
+                string query = "SELECT a.U_DescArtCli, b.BcdCode " +
+                                " FROM OSCN a " +
+                                " inner join OBCD b on convert(varchar, a.U_DescArtCli) = convert(varchar, b.UomEntry) and b.ItemCode = '" + sItem + "' " +
+                                " WHERE a.ItemCode = '" + sItem + "' " +
+                                    " and CardCode = '" + sCardCode + "'";
+
+                DataTable dt = new DBSAP_PRO().oBD_SP.EjecutarDT_DeQuery(query);
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
     //Protected Function GetValueByQuery(ByVal sQ As String)
     //    Dim oRS As SAPbobsCOM.Recordset = Me.oCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.BoRecordset)
