@@ -143,7 +143,7 @@ namespace DataIntegrator.Bussines
                 // si IsNumerico es falso: entonces el pedido viene del carrito nuevo
                 
                 if(isNumerico)
-                    sQueryCorreo = "select TOP 1 j3.U_CorreoElectronico Usuario from IntegratorSBO.[Principales].[tbp_DI_Pedidos] jj inner join [SBO_PRINCIPADO].[dbo].[@PPUSUCLIENTE] as j3  on jj.NumUsrCte = j3.U_NumUsuarioCliente where IdCarrito = '" + oF.IdCarrito + "'";
+                    sQueryCorreo = "select TOP 1 j3.U_CorreoElectronico Usuario from IntegratorSBO.[Principales].[tbp_DI_Pedidos] jj inner join [LLANES].[dbo].[@PPUSUCLIENTE] as j3  on jj.NumUsrCte = j3.U_NumUsuarioCliente where IdCarrito = '" + oF.IdCarrito + "'";
                 else
                     sQueryCorreo =  "SELECT TOP 1 j2.Usuario FROM IntegratorSBO.[Principales].[tbp_DI_Pedidos] jj Inner join GestorUsuarios.GestorUsuarios.tbr_GU_PersonaEmpresa as j1 on jj.NumUsrCte = j1.IdUsuario Inner join GestorUsuarios.GestorUsuarios.tbc_GU_Personas as j2 on  j1.IdPersona = j2.IdPersona where IdCarrito = '" + oF.IdCarrito + "'";
 
@@ -240,45 +240,45 @@ namespace DataIntegrator.Bussines
                     }
 
 
-                    if (!ClienteEncontrado)
-                    {
-                        DataTable dtClientes = new DBPedidos().DBGetObtieneClientesConUM();
-                        if (dtClientes != null && dtClientes.Rows.Count > 0)
-                        {
-                            foreach (DataRow drUM in dtClientes.Rows)
-                            {
-                                if (oF.cardcode.S() == drUM["CardCode"].S())
-                                {
-                                    ClienteEncontrado = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
+                    //if (!ClienteEncontrado)
+                    //{
+                    //    DataTable dtClientes = new DBPedidos().DBGetObtieneClientesConUM();
+                    //    if (dtClientes != null && dtClientes.Rows.Count > 0)
+                    //    {
+                    //        foreach (DataRow drUM in dtClientes.Rows)
+                    //        {
+                    //            if (oF.cardcode.S() == drUM["CardCode"].S())
+                    //            {
+                    //                ClienteEncontrado = true;
+                    //                break;
+                    //            }
+                    //        }
+                    //    }
+                    //}
 
                     int iOuMEntry = 0;
                     string sCodBar = string.Empty;
 
-                    if (ClienteEncontrado)
-                    {
-                        DataTable dtValItem = new DBMetodos().DBGetObtieneInfoArticulo(oCF.item, oF.cardcode.S());
-                        if (dtValItem != null && dtValItem.Rows.Count > 0)
-                        {
-                            iOuMEntry = dtValItem.Rows[0]["U_DescArtCli"].S().I();
-                            sCodBar = dtValItem.Rows[0]["BcdCode"].S();
+                    //if (ClienteEncontrado)
+                    //{
+                    //    DataTable dtValItem = new DBMetodos().DBGetObtieneInfoArticulo(oCF.item, oF.cardcode.S());
+                    //    if (dtValItem != null && dtValItem.Rows.Count > 0)
+                    //    {
+                    //        iOuMEntry = dtValItem.Rows[0]["U_DescArtCli"].S().I();
+                    //        sCodBar = dtValItem.Rows[0]["BcdCode"].S();
 
-                            if (iOuMEntry == -1)
-                            {
-                                iOuMEntry = new DBMetodos().GetValueByQuery("SELECT TOP 1 ou.UomEntry FROM OITM oi INNER JOIN OUOM ou ON oi.InvntryUom = ou.UomName WHERE oi.ITEMCODE ='" + oCF.item + "' ").S().I();
-                            }
-                        }
-                    }
-                    else
-                    {
+                    //        if (iOuMEntry == -1)
+                    //        {
+                    //            iOuMEntry = new DBMetodos().GetValueByQuery("SELECT TOP 1 ou.UomEntry FROM OITM oi INNER JOIN OUOM ou ON oi.InvntryUom = ou.UomName WHERE oi.ITEMCODE ='" + oCF.item + "' ").S().I();
+                    //        }
+                    //    }
+                    //}
+                    //else
+                    //{
                         iOuMEntry = new DBMetodos().GetValueByQuery("SELECT TOP 1 ou.UomEntry FROM OITM oi INNER JOIN OUOM ou ON oi.InvntryUom = ou.UomName WHERE oi.ITEMCODE ='" + oCF.item + "' ").S().I();
                         sCodBar = new DBMetodos().GetValueByQuery("SELECT TOP 1 BcdCode  FROM OITM oi INNER JOIN OUOM ou ON oi.InvntryUom = ou.UomName INNER JOIN OBCD ob ON ou.UomEntry = ob.UomEntry WHERE oi.ItemCode = '" + oCF.item + "'").S();
                         
-                    }
+                    //}
 
                     oSapDoc.Lines.UoMEntry = iOuMEntry;
                     oSapDoc.Lines.BarCode = sCodBar;

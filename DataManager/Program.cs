@@ -38,44 +38,44 @@ namespace DataIntegrator
                     MyGlobals.sStepLog = "Pedidos";
                     PedidosBO oPed = new PedidosBO();
                     oPed.Import();
-                    // ------------------------------------------------------------------------------------------------------------------------
-                    try
-                    {
-                        Utils.GuardarBitacora("Inicia Confirmacion Pedidos DrivIn");
-                        MyGlobals.sStepLog = "Confirmacion DrivIn";
-                        ConfirmacionBO oConf = new ConfirmacionBO();
-                        oConf.Import();
-                    }
-                    catch (Exception ex)
-                    {
-                        Utils.GuardarBitacora("Error en confirmaciones --> Error en paso " + MyGlobals.sStepLog + ": " + ex.Message);
-                    }
-                    // ------------------------------------------------------------------------------------------------------------------------
-                    try
-                    {
-                        Utils.GuardarBitacora("Inicia procesamiento de Pedidos Ariba");
-                        MyGlobals.sStepLog = "Pedidos ARIBA";
-                        AribaBO oPedAriba = new AribaBO();
-                        oPedAriba.Import();
-                    }
-                    catch (Exception ex)
-                    {
-                        Utils.GuardarBitacora("Error en pedidos de ARIBA --> Error en paso " + MyGlobals.sStepLog + ": " + ex.Message);
-                    }
+                    //// ------------------------------------------------------------------------------------------------------------------------
+                    //try
+                    //{
+                    //    Utils.GuardarBitacora("Inicia Confirmacion Pedidos DrivIn");
+                    //    MyGlobals.sStepLog = "Confirmacion DrivIn";
+                    //    ConfirmacionBO oConf = new ConfirmacionBO();
+                    //    oConf.Import();
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    Utils.GuardarBitacora("Error en confirmaciones --> Error en paso " + MyGlobals.sStepLog + ": " + ex.Message);
+                    //}
+                    //// ------------------------------------------------------------------------------------------------------------------------
+                    //try
+                    //{
+                    //    Utils.GuardarBitacora("Inicia procesamiento de Pedidos Ariba");
+                    //    MyGlobals.sStepLog = "Pedidos ARIBA";
+                    //    AribaBO oPedAriba = new AribaBO();
+                    //    oPedAriba.Import();
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    Utils.GuardarBitacora("Error en pedidos de ARIBA --> Error en paso " + MyGlobals.sStepLog + ": " + ex.Message);
+                    //}
 
-                    // ------------------------------------------------------------------------------------------------------------------------
-                    try
-                    {
-                        Utils.GuardarBitacora("Inicia descarga de imagenes de la confirmacion");
-                        MyGlobals.sStepLog = "";
-                        ImagesEntregaBO oImg = new ImagesEntregaBO();
-                        oImg.Import();
-                    }
-                    catch (Exception ex)
-                    {
-                        Utils.GuardarBitacora("Error en descarga de Imagenes --> Error en paso " + MyGlobals.sStepLog + ": " + ex.Message);
-                    }
-                    // ------------------------------------------------------------------------------------------------------------------------
+                    //// ------------------------------------------------------------------------------------------------------------------------
+                    //try
+                    //{
+                    //    Utils.GuardarBitacora("Inicia descarga de imagenes de la confirmacion");
+                    //    MyGlobals.sStepLog = "";
+                    //    ImagesEntregaBO oImg = new ImagesEntregaBO();
+                    //    oImg.Import();
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    Utils.GuardarBitacora("Error en descarga de Imagenes --> Error en paso " + MyGlobals.sStepLog + ": " + ex.Message);
+                    //}
+                    //// ------------------------------------------------------------------------------------------------------------------------
 
                     if (MyGlobals.oCompany.Connected)
                         MyGlobals.oCompany.Disconnect();
