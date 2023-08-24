@@ -112,7 +112,8 @@ namespace DataIntegrator.Bussines
                 oSapDoc.DocCurrency = oF.moneda;
                 oSapDoc.DiscountPercent = double.Parse(oF.descuento.S());
                 oSapDoc.UserFields.Fields.Item("U_PedidoAutorizado").Value = oF.autorizado;
-
+                
+                //oSapDoc.Series = Helpers.sSerie.S().I();
 
                 oSapDoc.Confirmed = SAPbobsCOM.BoYesNoEnum.tYES;
 
