@@ -38,19 +38,19 @@ namespace DataIntegrator
                     MyGlobals.sStepLog = "Pedidos";
                     PedidosBO oPed = new PedidosBO();
                     oPed.Import();
-                    //// ------------------------------------------------------------------------------------------------------------------------
-                    //try
-                    //{
-                    //    Utils.GuardarBitacora("Inicia Confirmacion Pedidos DrivIn");
-                    //    MyGlobals.sStepLog = "Confirmacion DrivIn";
-                    //    ConfirmacionBO oConf = new ConfirmacionBO();
-                    //    oConf.Import();
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    Utils.GuardarBitacora("Error en confirmaciones --> Error en paso " + MyGlobals.sStepLog + ": " + ex.Message);
-                    //}
-                    //// ------------------------------------------------------------------------------------------------------------------------
+                    // ------------------------------------------------------------------------------------------------------------------------
+                    try
+                    {
+                        Utils.GuardarBitacora("Inicia Confirmacion Pedidos DrivIn");
+                        MyGlobals.sStepLog = "Confirmacion DrivIn";
+                        ConfirmacionBO oConf = new ConfirmacionBO();
+                        oConf.Import();
+                    }
+                    catch (Exception ex)
+                    {
+                        Utils.GuardarBitacora("Error en confirmaciones --> Error en paso " + MyGlobals.sStepLog + ": " + ex.Message);
+                    }
+                    // ------------------------------------------------------------------------------------------------------------------------
                     //try
                     //{
                     //    Utils.GuardarBitacora("Inicia procesamiento de Pedidos Ariba");
